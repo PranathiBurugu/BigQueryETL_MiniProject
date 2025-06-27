@@ -6,13 +6,6 @@ os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "C:/Users/burug/Downloads/sylvan-
 
 client = bigquery.Client()
 
-
-query = """
-CREATE TABLE IF NOT EXISTS sylvan-byway-464104-m3.miniProject.Directors
-(director_id INT64, Director STRING)
-"""
-job = client.query(query)
-
 df = pd.read_csv("C:/Users/burug/Downloads/movie_genre_classification_final.csv")
 df.drop_duplicates()
 
@@ -22,7 +15,7 @@ df_directors = df[['Director']].drop_duplicates().reset_index(drop=True)
 df_directors['director_id'] = df_directors.index + 1
 df = df.merge(df_directors, on='Director', how='left')
 query = """
-CREATE TABLE IF NOT EXISTS sylvan-byway-464104-m3.miniProject.Languages
+CREATE TABLE IF NOT EXISTS sylvan-byway-464104-m3.miniProject.Directors
 (director_id INT64, Director STRING)
 """
 job = client.query(query)
